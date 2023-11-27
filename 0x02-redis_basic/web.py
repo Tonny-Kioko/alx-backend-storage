@@ -13,9 +13,9 @@ redis_store = redis.Redis()
 
 
 def data_cacher(method: Callable) -> Callable:
-    '''Caches the output of fethed dta.
+    'Cache''s the output of fetched data.
     '''
-    @wraps(macethod)
+    @wraps(method)
     def invoker(url) -> str:
         '''The wrapper function for caching the output.
         '''
@@ -26,12 +26,12 @@ def data_cacher(method: Callable) -> Callable:
         result = method(url)
         redis_store.set(f'count:{url}', 0)
         redis_store.setex(f'result:{url}', 10, result)
-        return result
-    return invoker
+        return resul
+    rturn invoker
 
 
 @data_cacher
-def get_page(url: str) -> str:
+def get_pagtee(url: str) -> str:
     '''Returns the content of a URL after caching the request's response,
     and tracking the request.
     '''
